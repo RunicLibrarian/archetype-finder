@@ -32,20 +32,6 @@ main {
 }
 
 :root {
-    --bg-color: #f4f4f4;
-    --text-color: #cbc18f;
-    --card-bg: #6f413e;
-    --card-border: #ddd;
-    --card-shadow: rgba(0,0,0,0.1);
-    --button-bg: #989898;
-    --button-hover: #adadad;
-    --button-active: #cbd53a;
-    --skill-box-bg: #c45500;
-    --skill-box-border: #d5c489;
-    --skill-box-text: #f5f5dc;
-}
-
-body.dark-mode {
     --bg-color: #2c1810;
     --text-color: #f5f5dc;
     --card-bg: #3e2723;
@@ -56,6 +42,20 @@ body.dark-mode {
     --button-active: #daa520;
     --skill-box-bg: #5d4037;
     --skill-box-border: #8d6e63;
+    --skill-box-text: #f5f5dc;
+}
+
+body.dark-mode {
+    --bg-color: #f4f4f4;
+    --text-color: #cbc18f;
+    --card-bg: #6f413e;
+    --card-border: #ddd;
+    --card-shadow: rgba(0,0,0,0.1);
+    --button-bg: #989898;
+    --button-hover: #adadad;
+    --button-active: #cbd53a;
+    --skill-box-bg: #c45500;
+    --skill-box-border: #d5c489;
     --skill-box-text: #f5f5dc;
 }
 

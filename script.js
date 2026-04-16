@@ -200,7 +200,7 @@ async function initData() {
     const skillHeaders = dataHeaders.slice(1).filter(header => header !== 'url');
 
     // Create checkbox and label for each skill
-    for (let i = 0; i <= skillHeaders.length - 1; i++) {
+    for (let i = 0; i <= skillHeaders.length - 2; i++) {
         // Create hidden checkbox input
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
