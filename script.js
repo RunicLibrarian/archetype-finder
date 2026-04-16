@@ -268,4 +268,31 @@ async function initData() {
 
     updateFilteredData();
 }
+document.getElementById('clear-all').addEventListener('click', () => {
+
+    // 1. Reset filter state
+    selectedLevel = "any";
+
+    for (let key in checkboxValues) {
+        checkboxValues[key] = null;
+    }
+
+    // 2. Reset UI checkboxes + labels
+    const checkboxes = document.querySelectorAll('#skillCheckboxes input[type="checkbox"]');
+
+    checkboxes.forEach((checkbox) => {
+        const label = checkbox.nextElementSibling;
+        if (label) label.removeAttribute('data-state');
+    });
+
+    // 3. Reset dropdown UI
+    const levelSelect = document.getElementById("levelFilter");
+    if (levelSelect) levelSelect.value = "any";
+
+    // 4. Clear URL completely
+    window.history.replaceState({}, "", window.location.pathname);
+
+    // 5. Re-render everything
+    updateFilteredData();
+});
 initData();
