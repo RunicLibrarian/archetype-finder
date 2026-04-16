@@ -36,17 +36,40 @@ function updateURLFromFilters() {
 function loadFiltersFromURL() {
     const params = new URLSearchParams(window.location.search);
 
-    // Level
+    // level
     if (params.has("level")) {
         selectedLevel = params.get("level");
     }
 
-    // Skills
+    // skills
     for (let key in checkboxValues) {
         if (params.has(key)) {
             const val = params.get(key);
+
             if (val === "1") checkboxValues[key] = true;
             else if (val === "0") checkboxValues[key] = false;
+        }
+    }
+}
+function syncUIFromState() {
+
+    // sync dropdown
+    const levelSelect = document.getElementById("levelFilter");
+    if (levelSelect) levelSelect.value = selectedLevel;
+
+    // sync labels
+    for (let key in checkboxValues) {
+        const checkbox = document.getElementById(key);
+        const label = checkbox?.nextElementSibling;
+
+        if (!label) continue;
+
+        const state = checkboxValues[key];
+
+        if (state === null) {
+            label.removeAttribute("data-state");
+        } else {
+            label.setAttribute("data-state", state);
         }
     }
 }
@@ -260,13 +283,29 @@ async function initData() {
         skillCheckboxes.appendChild(label);
     });
 
-    loadFiltersFromURL();
+        loadFiltersFromURL();
 
-    // sync dropdown
-    const levelEl = document.getElementById("levelFilter");
-    if (levelEl) levelEl.value = selectedLevel;
+        // sync dropdown
+        const levelEl = document.getElementById("levelFilter");
+        if (levelEl) levelEl.value = selectedLevel;
 
-    updateFilteredData();
+        // NEW: sync checkbox label UI state
+        for (let key in checkboxValues) {
+            const checkbox = document.getElementById(key);
+            const label = checkbox?.nextElementSibling;
+
+            if (!label) continue;
+
+            const state = checkboxValues[key];
+
+            if (state === null) {
+                label.removeAttribute("data-state");
+            } else {
+                label.setAttribute("data-state", state);
+            }
+        }
+
+        updateFilteredData();
 }
 document.getElementById('clear-all').addEventListener('click', () => {
 
