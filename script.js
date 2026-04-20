@@ -334,4 +334,44 @@ document.getElementById('clear-all').addEventListener('click', () => {
     // 5. Re-render everything
     updateFilteredData();
 });
+async function loadRSS() {
+  const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fsite.pathfinderinfinite.com%2Frss_bestsellers.php%3Faffiliate_id%3D3270923");
+  const data = await res.json();
+
+  displayRSS(data.items);
+}
+function displayRSS(items) {
+  const container = document.getElementById("rss-feed");
+  container.innerHTML = ""; // clear existing
+
+  items.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "rss-card";
+
+    card.innerHTML = `
+      <h3>
+        <a href="${item.link}" target="_blank">
+          ${item.title}
+        </a>
+      </h3>
+      <p class="rss-date">${new Date(item.pubDate).toLocaleDateString()}</p>
+      <p class="rss-desc">${item.description}</p>
+    `;
+
+    container.appendChild(card);
+  });
+}
+document.getElementById('theme-toggle').addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+
+    const button = document.getElementById('theme-toggle');
+
+    if (document.body.classList.contains('dark-mode')) {
+        button.innerHTML = `<span class="material-symbols-outlined">light_mode</span>`;
+    } else {
+        button.innerHTML = `<span class="material-symbols-outlined">dark_mode</span>`;
+    }
+});
+
+loadRSS();
 initData();
